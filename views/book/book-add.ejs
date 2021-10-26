@@ -1,0 +1,52 @@
+<%- include('../partials/header.ejs') %>
+
+    <h1 class="text text-success text-center">Kitob qo'shish</h1>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <form action="/book/add" method="post" enctype="multipart/form-data">
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input name="name" type="text" id="name" class="form-control" />
+                                <label class="form-label" for="name">Book name</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <input name="number" type="number" id="number" class="form-control" />
+                                <label class="form-label" for="number">Book Number</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input name="email" type="email" id="email" class="form-control" />
+                        <label class="form-label" for="email">Email address</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input name="price" type="number" id="price" class="form-control" />
+                        <label class="form-label" for="price">Price</label>
+                    </div>
+
+                    <!-- Checkbox -->
+                    <div class="form-check d-flex justify-content-center mb-4">
+                        <input name="image" class="form-control" type="file"  id="images" />
+                        <label class="form-check-label" for="images">Images</label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <%- include('../partials/footer.ejs') %>

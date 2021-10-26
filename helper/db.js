@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 module.exports = () => {
-    mongoose.connect('mongodb://localhost:27017/test')
+    mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         console.log(`Mongoga Ulandik`)
     }).catch(err => {

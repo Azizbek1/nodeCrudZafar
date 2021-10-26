@@ -1,8 +1,39 @@
 <%- include('partials/header.ejs')  %>
 
+    <h1 class="text text-success text-center">Asosiy saxifa</h1>
 
-
-
+    <div class="container">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">KitobNomi</th>
+                <th scope="col">KitobRaqami</th>
+                <th scope="col">KitobEMail</th>
+                <th scope="col">KitobNarxi</th>
+                <th scope="col">KitobRasimi</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% books.forEach(book => {   %> 
+                    <tr>
+                        <td><%= book.name  %></td>
+                        <td><%= book.number  %></td>
+                        <td><%= book.email  %></td>
+                        <td><%= book.price  %></td>
+                        <td>
+                            <img src="<%= book.image  %>" alt="png" width="50">
+                        </td>
+                        <td>
+                            <a href="/edit" class="btn btn-warning">Edit</a>
+                            <a href="/delete" class="btn btn-danger">Delete</a>
+                        </td>
+                     </tr>
+                <%  });  %>
+             
+            </tbody>
+          </table>
+    </div>
 
 
 <%- include('partials/footer.ejs')  %>
