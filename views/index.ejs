@@ -15,22 +15,21 @@
               </tr>
             </thead>
             <tbody>
-                <% books.forEach(book => {   %> 
-                    <tr>
-                        <td><%= book.name  %></td>
-                        <td><%= book.number  %></td>
-                        <td><%= book.email  %></td>
-                        <td><%= book.price  %></td>
-                        <td>
-                            <img src="<%= book.image  %>" alt="png" width="50">
-                        </td>
-                        <td>
-                            <a href="/edit" class="btn btn-warning">Edit</a>
-                            <a href="/delete" class="btn btn-danger">Delete</a>
-                        </td>
-                     </tr>
-                <%  });  %>
-             
+                    <% books.forEach(book => {   %> 
+                        <tr>
+                            <td><%= book.name  %></td>
+                            <td><%= book.number  %></td>
+                            <td><%= book.email  %></td>
+                            <td><%= book.price  %></td>
+                            <td>
+                                <img src="<%= book.image  %>" alt="png" width="50">
+                            </td>
+                            <td>
+                                <a href="/book/edit/<%= book._id %>" class="btn btn-warning">Edit</a>
+                                <a href="/book/delete/<%= book._id %>" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                  <%  });  %>
             </tbody>
           </table>
     </div>

@@ -13,6 +13,7 @@ const db = require('./helper/db')();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const bookRouter = require('./routes/book');
+const categRouter = require('./routes/category');
 
 
 
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', indexRouter);
 app.use('/book', bookRouter);
+app.use('/category', categRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

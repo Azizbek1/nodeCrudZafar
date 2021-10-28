@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const Book = require('../models/Book');
-
+const fs = require('fs');
 /* GET home page. */
 router.get('/add', function(req, res, next) {
   res.render('book/book-add');
@@ -22,6 +22,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage}).single('image')
 
+
+/* ADD BOOK */
 router.post('/add',  upload, async (req, res) => {
       const book = await new Book({
         name:req.body.name,
@@ -42,5 +44,74 @@ router.post('/add',  upload, async (req, res) => {
 
 
 
+/* EDIT BOOK */
+router.get('/edit/:id', async (req, res, next) => {
+    const id = req.params.id;
+    Book.findById(id, (err, book) => {
+      if(err)
+         console.log(err);
+      else{
+         if(book == null) {
+           res.redirect('/');
+         }else{
+           res.render('book/book-edit', {
+               book
+           })
+         }
+      }   
+    })
+})
+
+/* ================   EDIT POST    ================ */
+router.post('/update/:id', upload, async (req, res) => {
+   const id = req.params.id
+   let new_images = '';
+   if(req.file){
+      new_images = req.file.filename
+      try{
+        fs.unlinkSync(`./uploads/${req.body.old_image}`)
+      }catch(err){
+        console.log(err)
+      }
+   }
+   else{
+    new_images = req.body.old_image
+   }
+   await Book.findByIdAndUpdate(id, {
+    name: req.body.name,
+    number: req.body.number,
+    email: req.body.email,
+    price: req.body.price,
+    image: new_images
+   }, (err, data) => {
+      if(err) 
+       console.log(err)
+       else{
+         res.redirect('/')
+       }
+   })
+})
+
+
+/* ================  DELETE    ================ */
+router.get('/delete/:id', async (req, res) => {
+  const id = req.params.id
+  await Book.findByIdAndRemove(id, (err, data) => {
+    if(data.image != '') {
+       try{
+        fs.unlinkSync(`./uploads/${data.image}`)
+       } 
+       catch(err) {
+         console.log(err);
+       }
+    }
+    if(err) {
+      console.log(err)
+    }
+    else{
+      res.redirect('/')
+    }
+  })
+})
 
 module.exports = router;
