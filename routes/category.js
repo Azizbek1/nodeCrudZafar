@@ -5,8 +5,24 @@ const Category = require('../models/Category');
 
 
 /* GET home page. */
-router.get('/add', function(req, res, next) {
+router.get('/add', async function(req, res, next) { 
+ 
   res.render('category/categ-add');
+});
+
+router.get('/all', async function(req, res, next) { 
+  const categoryAll = await Category.find();
+  try { 
+    if(categoryAll) {
+      res.render('category/categody-list', {
+        categoryAll
+      })
+    }else{
+      console.log(`Xatolik bor`);
+    }
+  }catch(err ) {
+    console.log(err);
+  }
 });
 
 

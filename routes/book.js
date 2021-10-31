@@ -3,12 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const Book = require('../models/Book');
 const fs = require('fs');
-/* GET home page. */
-router.get('/add', function(req, res, next) {
-  res.render('book/book-add');
-});
-
-
+const Category = require('../models/Category');
 
 /* UPLOADS IMAGES */
 const storage = multer.diskStorage({
@@ -19,18 +14,31 @@ const storage = multer.diskStorage({
     cb(null,  `${file.fieldname}_${Date.now()}_${file.originalname}`)
   }
 })
-
 const upload = multer({storage}).single('image')
+
+
+
+
+/* GET home page. */
+router.get('/add', async function(req, res, next) {
+  const category = await Category.find();
+  res.render('book/book-add', {
+    category
+  });
+});
+
 
 
 /* ADD BOOK */
 router.post('/add',  upload, async (req, res) => {
+      console.log(req.body.category)
       const book = await new Book({
         name:req.body.name,
         number:req.body.number,
         email:req.body.email,
         price:req.body.price,
         image:req.file.filename,
+        category_id: req.body.category
       })
       await book.save(err => {
         if(err) {

@@ -10,6 +10,7 @@
                 <th scope="col">KitobRaqami</th>
                 <th scope="col">KitobEMail</th>
                 <th scope="col">KitobNarxi</th>
+                <th scope="col">CategoryId</th>
                 <th scope="col">KitobRasimi</th>
                 <th scope="col">Action</th>
               </tr>
@@ -21,6 +22,7 @@
                             <td><%= book.number  %></td>
                             <td><%= book.email  %></td>
                             <td><%= book.price  %></td>
+                            <td><%= book.category_id.name  %></td>
                             <td>
                                 <img src="<%= book.image  %>" alt="png" width="50">
                             </td>

@@ -40,6 +40,15 @@
                         <label class="form-check-label" for="images">Images</label>
                     </div>
 
+                    <!-- Checkbox -->
+                    <div class="form-check d-flex justify-content-center mb-4">
+                        <select class="form-control" name="category">
+                            <% category.forEach(cat => { %>
+                                <option value="<%= cat.id %>"><%=  cat.name %></option>
+                            <% }); %>
+                          </select>
+                    </div>
+
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
                 </form>
